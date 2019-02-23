@@ -16,6 +16,12 @@ source devel/setup.bash
 roslaunch panda_simulation simulation.launch
 ```
 
+Depending on your operating systems language you might need to export the numeric type so that rviz can read the floating point numbers in the robot model correctly:
+
+```
+export LC_NUMERIC="en_US.UTF-8"
+```
+Otherwise, the robot will appear in rviz in a collapsed state.
 
 
 You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
