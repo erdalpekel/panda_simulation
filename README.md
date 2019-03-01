@@ -3,7 +3,7 @@
 This package was built for ROS melodic running under Ubuntu 18.04. Run the following command to make sure that all additional packages are installed:
 
 ```
-sudo apt-get install ros-melodic-moveit-ros-move-group ros-melodic-controller-manager* ros-melodic-moveit* ros-melodic-effort-controllers ros-melodic-joint-trajectory-controller ros-melodic-gazebo-ros* ros-melodic-rviz*
+sudo apt-get install ros-melodic-moveit-ros-move-group ros-melodic-controller-manager* ros-melodic-moveit* ros-melodic-effort-controllers ros-melodic-joint-trajectory-controller ros-melodic-gazebo-ros* ros-melodic-rviz* libboost-filesystem-dev libjsoncpp-dev
 ```
 It is also important that you build the *libfranka* library from source and pass its directory to *catkin_make*  when building this ROS package as described in [this tutorial](https://frankaemika.github.io/docs/installation.html#building-from-source).
 
@@ -25,3 +25,7 @@ Otherwise, the robot will appear in rviz in a collapsed state.
 
 
 You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
+
+## Extension: _MoveIt!_ constraint-aware planning
+
+This repository was extended with a _MoveIt!_ planning where the motion planning pipeline avoids collision objects in the environment specified by the user in a separate directory (`~/.panda_simulation`) as _JSON_ files. You can read more about it in the accompanying [blog post](https://erdalpekel.de/?p=123).
