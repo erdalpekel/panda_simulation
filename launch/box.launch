@@ -1,0 +1,9 @@
+<launch>
+    <param name="box_description" command="$(find xacro)/xacro --inorder $(find panda_simulation)/models/box.xacro"/>
+    <node name="box_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" args="robot_description:=box_description" />
+    <node name="spawn_object" pkg="gazebo_ros" type="spawn_model" args="-param box_description -urdf -model box"/>
+
+
+    <!-- launch node -->
+    <node pkg="panda_simulation" type="box_publisher_node" name="box_publisher_node" />
+</launch>

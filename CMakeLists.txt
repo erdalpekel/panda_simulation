@@ -57,5 +57,7 @@ include_directories(
 )
 
 add_executable(robot_control_node  src/robot_control_node.cpp)
+add_executable(box_publisher_node  src/box_publisher.cpp)
 
 target_link_libraries(robot_control_node ${catkin_LIBRARIES} boost_filesystem ${JSONCPP_LIBRARIES})
+target_link_libraries(box_publisher_node ${catkin_LIBRARIES})

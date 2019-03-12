@@ -29,3 +29,7 @@ You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
 ## Extension: _MoveIt!_ constraint-aware planning
 
 This repository was extended with a ROS node that communicates with the _MoveIt!_ Planning Scene API. It makes sure that the motion planning pipeline avoids collision objects in the environment specified by the user in a separate directory (`~/.panda_simulation`) as _JSON_ files. You can read more about it in the accompanying [blog post](https://erdalpekel.de/?p=123).
+
+## Extension: Publishing a box at Panda's hand in _Gazebo_
+
+This repository was extended with a node that publishes a simple box object in the _Gazebo_ simulation at the hand of the robot. The position of this box will get updated as soon as the robot moves. You can read more about it in the accompanying [blog post](https://erdalpekel.de/?p=178).
