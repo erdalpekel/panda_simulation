@@ -17,40 +17,19 @@
 
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>controller_manager</build_depend>
-  <build_depend>effort_controllers</build_depend>
-  <build_depend>gazebo_ros</build_depend>
-  <build_depend>joint_state_controller</build_depend>
-  <build_depend>joint_state_publisher</build_depend>
-  <build_depend>joint_trajectory_controller</build_depend>
-  <build_depend>robot_state_publisher</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>tf</build_depend>
-  <build_depend>xacro</build_depend>
-  <build_export_depend>controller_manager</build_export_depend>
-  <build_export_depend>effort_controllers</build_export_depend>
-  <build_export_depend>gazebo_ros</build_export_depend>
-  <build_export_depend>joint_state_controller</build_export_depend>
-  <build_export_depend>joint_state_publisher</build_export_depend>
-  <build_export_depend>joint_trajectory_controller</build_export_depend>
-  <build_export_depend>robot_state_publisher</build_export_depend>
-  <build_export_depend>roscpp</build_export_depend>
-  <build_export_depend>std_msgs</build_export_depend>
-  <build_export_depend>tf</build_export_depend>
-  <build_export_depend>xacro</build_export_depend>
-  <exec_depend>controller_manager</exec_depend>
-  <exec_depend>effort_controllers</exec_depend>
-  <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>joint_state_controller</exec_depend>
-  <exec_depend>joint_state_publisher</exec_depend>
-  <exec_depend>joint_trajectory_controller</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>roscpp</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>tf</exec_depend>
-  <exec_depend>xacro</exec_depend>
-
+  
+  <depend>controller_manager</depend>
+  <depend>effort_controllers</depend>
+  <depend>gazebo_ros</depend>
+  <depend>joint_state_controller</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>joint_trajectory_controller</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+  <depend>xacro</depend>
+  
   <!-- CUSTOM -->
   <depend>moveit_core</depend>
   <depend>moveit_ros_planning_interface</depend>
