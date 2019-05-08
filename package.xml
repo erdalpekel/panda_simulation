@@ -30,6 +30,7 @@
   <depend>std_msgs</depend>
   <depend>tf</depend>
   <depend>xacro</depend>
+  <depend>libjsoncpp-dev</depend>
   
   <!-- CUSTOM -->
   <depend>moveit_core</depend>
