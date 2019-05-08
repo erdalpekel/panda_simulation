@@ -1,9 +1,17 @@
 # panda_simulation
 
-This package was built for ROS melodic running under Ubuntu 18.04. Run the following command to make sure that all additional packages are installed:
+This package was written for ROS melodic running under Ubuntu 18.04. Run the following commands to make sure that all additional packages are installed:
 
 ```
-sudo apt-get install ros-melodic-moveit-ros-move-group ros-melodic-controller-manager* ros-melodic-moveit* ros-melodic-effort-controllers ros-melodic-joint-trajectory-controller ros-melodic-gazebo-ros* ros-melodic-rviz* libboost-filesystem-dev libjsoncpp-dev
+mkdir -p catkin_ws/src
+cd catkin_ws/src
+git clone https://github.com/erdalpekel/panda_simulation.git
+git clone https://github.com/erdalpekel/panda_moveit_config.git
+git clone --branch simulation https://github.com/erdalpekel/franka_ros.git
+cd ..
+sudo apt-get install libboost-filesystem-dev
+rosdep install --from-paths src --ignore-src -y --skip-keys libfranka --skip-keys moveit_perception
+cd ..
 ```
 It is also important that you build the *libfranka* library from source and pass its directory to *catkin_make*  when building this ROS package as described in [this tutorial](https://frankaemika.github.io/docs/installation.html#building-from-source).
 
