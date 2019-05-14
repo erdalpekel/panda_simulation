@@ -26,7 +26,8 @@
 
 
     <!-- load the controllers -->
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller panda_hand_controller panda_arm_controller" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller panda_arm_controller" />
+    <node if="$(arg load_gripper)" name="controller_spawner_hand" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="panda_hand_controller" />
 
 
     <!-- convert joint states to TF transforms for rviz, etc -->
@@ -34,8 +35,11 @@
 
     <include file="$(find panda_moveit_config)/launch/planning_context.launch">
         <arg name="load_robot_description" value="true"/>
+        <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
-    <include file="$(find panda_moveit_config)/launch/move_group.launch" />
+    <include file="$(find panda_moveit_config)/launch/move_group.launch" >
+        <arg name="load_gripper" value="$(arg load_gripper)" />
+    </include>
     <include file="$(find panda_moveit_config)/launch/moveit_rviz.launch" />
 
     <node name="joint_state_desired_publisher" pkg="topic_tools" type="relay" args="joint_states joint_states_desired" />
