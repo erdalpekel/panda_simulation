@@ -1,5 +1,7 @@
 # panda_simulation
 
+![Panda in Gazebo](assets/panda-in-gazebo.png?raw=true "Panda in Gazebo")
+
 This package was written for ROS melodic running under Ubuntu 18.04. Run the following commands to make sure that all additional packages are installed:
 
 ```
