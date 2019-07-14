@@ -43,3 +43,7 @@ This repository was extended with a ROS node that communicates with the _MoveIt!
 ## Extension: Publishing a box at Panda's hand in _Gazebo_
 
 This repository was extended with a node that publishes a simple box object in the _Gazebo_ simulation at the hand of the robot. The position of this box will get updated as soon as the robot moves. You can read more about it in the accompanying [blog post](https://erdalpekel.de/?p=178).
+
+## Extension: Visual Studio Code Remote Docker
+
+I have added configuration files and additional setup scripts for developing and using this ROS package within a *Docker* container. Currently user interfaces for Gazebo and RViz are not supported. You can read more about it in the [blog post](https://erdalpekel.de/?p=219).
