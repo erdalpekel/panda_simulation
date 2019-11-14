@@ -80,8 +80,24 @@ int main(int argc, char **argv)
 
     if (!fs::exists(app_directory) && !fs::is_directory(app_directory))
     {
-      ROS_ERROR_STREAM(app_directory << " does not exist");
-      return -1;
+      ROS_WARN_STREAM(app_directory << " does not exist");
+
+      // Create .panda_simulation directory
+      std::string path(getenv("HOME"));
+      path += "/.panda_simulation";
+      ROS_INFO("Creating %s collision objects directory.", path);
+      try
+      {
+        boost::filesystem::create_directory(path);
+      }
+      catch (const std::exception&)
+      {
+        ROS_ERROR(
+          "%s directory could not be created."
+          "Please create this directory yourself "
+          "if you want to specify collision objects.", path.c_str());
+        return -1;
+      }
     }
 
     std::vector<moveit_msgs::CollisionObject> collision_objects;
