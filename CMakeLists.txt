@@ -40,7 +40,7 @@ message(${JSONCPP_LIBRARIES})
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
 catkin_package(
-  CATKIN_DEPENDS 
+  CATKIN_DEPENDS
   moveit_core
   moveit_visual_tools
   moveit_ros_planning_interface

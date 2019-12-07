@@ -37,7 +37,7 @@
         <arg name="load_robot_description" value="true"/>
         <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
-    <include file="$(find panda_moveit_config)/launch/move_group.launch" >
+    <include file="$(find panda_moveit_config)/launch/move_group.launch">
         <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
     <group if="$(arg gui)">
@@ -45,8 +45,8 @@
     </group>
 
     <node name="joint_state_desired_publisher" pkg="topic_tools" type="relay" args="joint_states joint_states_desired" />
-    
+
     <!-- launch robot control node for moveit motion planning -->
-    <node pkg="panda_simulation" type="robot_control_node" name="robot_control_node" />
+    <node pkg="panda_simulation" type="robot_control_node" name="robot_control_node" output="screen"/>
 
 </launch>
