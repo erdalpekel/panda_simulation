@@ -1,0 +1,3 @@
+<library path="lib/libpanda_simulation_controllers_lib">
+    <class name="panda_simulation/JointPositionController" type="panda_simulation::JointPositionController" base_class_type="controller_interface::ControllerBase" />
+</library>
