@@ -17,7 +17,7 @@
 
 
   <buildtool_depend>catkin</buildtool_depend>
-
+  
   <depend>controller_manager</depend>
   <depend>effort_controllers</depend>
   <depend>gazebo_ros</depend>
@@ -32,19 +32,16 @@
   <depend>xacro</depend>
   <depend>libjsoncpp-dev</depend>
   <depend>moveit_simple_controller_manager</depend>
-
+  
   <!-- CUSTOM -->
   <depend>moveit_core</depend>
   <depend>moveit_ros_planning_interface</depend>
   <depend>moveit_ros_perception</depend>
   <depend>moveit_visual_tools</depend>
-  <depend>controller_interface</depend>
-  <depend>hardware_interface</depend>
-
-  <exec_depend>pluginlib</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <controller_interface plugin="${prefix}/controller_plugins.xml" />
+    <!-- Other tools can request additional information be placed here -->
+
   </export>
 </package>
