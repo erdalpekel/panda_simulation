@@ -36,14 +36,26 @@ Otherwise, the robot will appear in rviz in a collapsed state.
 
 You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
 
-## Extension: _MoveIt!_ constraint-aware planning
+## Changelog:
 
-This repository was extended with a ROS node that communicates with the _MoveIt!_ Planning Scene API. It makes sure that the motion planning pipeline avoids collision objects in the environment specified by the user in a separate directory (`~/.panda_simulation`) as _JSON_ files. You can read more about it in the accompanying [blog post](https://erdalpekel.de/?p=123).
+   [_MoveIt!_ constraint-aware planning](https://erdalpekel.de/?p=123)
 
-## Extension: Publishing a box at Panda's hand in _Gazebo_
+   This repository was extended with a ROS node that communicates with the _MoveIt!_ Planning Scene API. It makes sure that the motion planning pipeline avoids collision objects in the environment specified by the user in a separate directory (`~/.panda_simulation`) as _json_ files.
 
-This repository was extended with a node that publishes a simple box object in the _Gazebo_ simulation at the hand of the robot. The position of this box will get updated as soon as the robot moves. You can read more about it in the accompanying [blog post](https://erdalpekel.de/?p=178).
+   [Publishing a box at Panda's hand in _Gazebo_](https://erdalpekel.de/?p=123)
 
-## Extension: Visual Studio Code Remote Docker
+   This repository was extended with a node that publishes a simple box object in the _Gazebo_ simulation at the hand of the robot. The position of this box will get updated as soon as the robot moves.
 
-I have added configuration files and additional setup scripts for developing and using this ROS package within a *Docker* container. Currently user interfaces for Gazebo and RViz are not supported. You can read more about it in the [blog post](https://erdalpekel.de/?p=219).
+   [Visual Studio Code Remote Docker](https://erdalpekel.de/?p=123)
+
+   I have added configuration files and additional setup scripts for developing and using this ROS package within a *Docker* container. Currently user interfaces for Gazebo and RViz are not supported.
+
+   [Position based trajectory execution](https://erdalpekel.de/?p=285)
+
+   The joint specifications in Gazebo were changed from an effort interface to position based interface. Furthermore, the PID controller was substituted with the simple gazebo internal position based control mechanism for a more stable movement profile of the robot.
+
+   [automatic robot state initialization with custom joint position based controller](https://erdalpekel.de/?p=314)
+
+   A custom joint position based controller was implemented in order to set the initial joint states of the robot to a valid configuration. A separate ROS node was implemented that starts this custom controller and initializes the robot with a specific configuration. It switches back to the default controllers after the robot reaches the desired state.
+
+![Panda state initialization in Gazebo](assets/robot-state-initializer.gif?raw=true "Panda state initialization in Gazebo")
