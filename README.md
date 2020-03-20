@@ -52,10 +52,10 @@ You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
 
    [Position based trajectory execution](https://erdalpekel.de/?p=285)
 
-   The joint specifications in Gazebo were changed from an effort interface to position based interface. Furthermore, the PID controller was substituted with the simple gazebo internal position based control mechanism for a more stable movement profile of the robot.
+   The joint specifications in Gazebo were changed from an effort interface to position based interface. Furthermore, the PID controller was substituted with the simple gazebo internal position based control mechanism for a more stable movement profile of the robot. A custom joint position based controller was implemented in order to set the initial joint states of the robot to a valid configuration.
 
-   [automatic robot state initialization with custom joint position based controller](https://erdalpekel.de/?p=314)
+   [Automatic robot state initialization](https://erdalpekel.de/?p=314)
 
-   A custom joint position based controller was implemented in order to set the initial joint states of the robot to a valid configuration. A separate ROS node was implemented that starts this custom controller and initializes the robot with a specific configuration. It switches back to the default controllers after the robot reaches the desired state.
+   A separate ROS node was implemented that starts a custom joint position controller and initializes the robot with a specific configuration. It switches back to the default controllers after the robot reaches the desired state.
 
 ![Panda state initialization in Gazebo](assets/robot-state-initializer.gif?raw=true "Panda state initialization in Gazebo")
