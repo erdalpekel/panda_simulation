@@ -12,6 +12,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} ${GAZEBO_C
 find_package(catkin REQUIRED COMPONENTS
   controller_manager
   effort_controllers
+  position_controllers
+  velocity_controllers
   gazebo_ros
   joint_state_controller
   joint_state_publisher
