@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
   ros::Duration(2.0).sleep();
 
   // 1. switch from default joint trajectory controller to custom position controller
-  std::string panda_arm_controller{"panda_arm_controller"}, panda_hand_controller{"panda_hand_controller"},
+  std::string panda_arm_controller{"position_joint_trajectory_controller"}, panda_hand_controller{"franka_gripper"},
       joint_position_controller{"joint_position_controller"};
   std::vector<std::string> stop_controllers{panda_arm_controller, panda_hand_controller};
   std::vector<std::string> start_controllers{joint_position_controller};

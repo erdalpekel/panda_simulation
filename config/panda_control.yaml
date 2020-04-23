@@ -3,7 +3,7 @@
         type: joint_state_controller/JointStateController
         publish_rate: 100
 
-    panda_arm_controller:
+    position_joint_trajectory_controller:
         type: position_controllers/JointTrajectoryController
         joints:
             - panda_joint1
