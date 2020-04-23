@@ -1,0 +1,4 @@
+- git:
+    local-name: franka_ros
+    uri: https://github.com/erdalpekel/franka_ros
+    version: simulation
