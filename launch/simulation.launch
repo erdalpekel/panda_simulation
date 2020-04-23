@@ -6,6 +6,8 @@
     <arg name="use_sim_time" default="true" />
     <arg name="gui" default="true" />
     <arg name="headless" default="false" />
+    <arg name="world_name" default="worlds/empty.world" />
+    <arg name="rviz" default="true" />
     <arg name="debug" default="false" />
     <arg name="load_gripper" default="true" />
 
@@ -17,6 +19,7 @@
         <arg name="paused" value="$(arg paused)" />
         <arg name="use_sim_time" value="$(arg use_sim_time)" />
         <arg name="headless" value="$(arg headless)" />
+        <arg name="world_name" value="$(arg world_name)" />
     </include>
 
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model panda" />
@@ -40,7 +43,7 @@
     <include file="$(find panda_moveit_config)/launch/move_group.launch">
         <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
-    <group if="$(arg gui)">
+    <group if="$(arg rviz)">
         <include file="$(find panda_moveit_config)/launch/moveit_rviz.launch" />
     </group>
 
