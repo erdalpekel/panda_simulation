@@ -32,6 +32,11 @@
   <depend>xacro</depend>
   <depend>libjsoncpp-dev</depend>
   <depend>moveit_simple_controller_manager</depend>
+  <depend>rosbridge_library</depend>
+  <depend>rosbridge_server</depend>
+  <depend>rosbridge_msgs</depend>
+  <depend>rosapi</depend>
+  <depend>tf2_web_republisher</depend>
 
   <!-- CUSTOM -->
   <depend>moveit_core</depend>

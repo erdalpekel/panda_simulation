@@ -55,4 +55,11 @@
     <!-- run custom node for automatic intialization -->
     <node pkg="panda_simulation" type="robot_state_initializer_node" name="robot_state_initializer_node" />
 
+    <!-- for web interface -->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+        <arg name="port" value="9090" />
+    </include>
+
+    <node pkg="tf2_web_republisher" type="tf2_web_republisher" name="tf2_web_republisher" />
+
 </launch>

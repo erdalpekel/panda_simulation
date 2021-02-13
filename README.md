@@ -59,3 +59,9 @@ You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
    A separate ROS node was implemented that starts a custom joint position controller and initializes the robot with a specific configuration. It switches back to the default controllers after the robot reaches the desired state.
 
 ![Panda state initialization in Gazebo](assets/robot-state-initializer.gif?raw=true "Panda state initialization in Gazebo")
+
+   [Panda web interface](https://erdalpekel.de/?p=340)
+
+   A minimalist web interface based on ReactJS is showcased which can visualize the robot joint data and the visual state in real-time in the browser.
+
+![Panda web interface](assets/panda-web-interface.png?raw=true "Panda web interface")
