@@ -30,7 +30,9 @@ find_package(catkin REQUIRED
                         rosbridge_server
                         rosbridge_msgs
                         rosapi
-                        tf2_web_republisher)
+                        tf2_web_republisher
+                        panda_msgs
+                        panda_utils)
 
 # System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS filesystem)
@@ -50,6 +52,8 @@ catkin_package(CATKIN_DEPENDS
                controller_interface
                hardware_interface
                pluginlib
+               panda_msgs
+               panda_utils
                DEPENDS
                system_lib)
 
@@ -63,6 +67,8 @@ include_directories(${catkin_INCLUDE_DIRS})
 add_executable(robot_control_node src/robot_control_node.cpp)
 add_executable(box_publisher_node src/box_publisher.cpp)
 add_executable(robot_state_initializer_node src/robot_state_initializer.cpp)
+
+add_dependencies(robot_control_node panda_msgs_generate_messages_cpp)
 
 target_link_libraries(robot_control_node ${catkin_LIBRARIES} boost_filesystem ${JSONCPP_LIBRARIES})
 target_link_libraries(box_publisher_node ${catkin_LIBRARIES})

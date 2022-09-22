@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>panda_msgs</name>
+    <version>0.0.1</version>
+    <description>panda_simulation - messages</description>
+
+    <maintainer email="info@erdalpekel.de">Erdal Pekel</maintainer>
+    <author email="info@erdalpekel.de">Erdal Pekel</author>
+
+    <license>TODO</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <depend>std_msgs</depend>
+    <depend>geometry_msgs</depend>
+
+    <build_depend>message_generation</build_depend>
+
+    <exec_depend>message_runtime</exec_depend>
+
+</package>

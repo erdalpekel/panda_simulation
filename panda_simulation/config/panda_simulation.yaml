@@ -1,0 +1,42 @@
+panda_simulation:
+  simulation: true
+  camera_goal_distance: 1.0
+  detector_camera_name: "xray"
+  image_plane_frame_suffix: "/image_plane"
+  camera_link_suffix: "_link"
+  camera_info_suffix: "/color/camera_info"
+  camera_image_suffix: "/color/image_raw"
+  camera_depth_suffix: "/kinect/depth/points"
+  camera_center_frame_suffix: "/kinect_pc_frame"
+  trajectory_sub_goal_topic: "/panda_arm_controller/follow_joint_trajectory/goal"
+  trajectory_sub_result_topic: "/panda_arm_controller/follow_joint_trajectory/result"
+  joint_position_command_topic: "/panda/joint_position_controller/command"
+  controller_manager_switch_topic: "/panda/controller_manager/switch_controller"
+  collision_env: "microfocus-front"
+  collision_detection:
+    mesh_voxelation_spacing: [0.02, 0.02, 0.02]
+    opencl_platform: 0
+    opencl_detection_kernel_collected_options: ""
+    opencl_verification_kernel_collected_options: ""
+    opencl_default_device: 0
+    opencl_kernel_mode: "accurate"
+    opencl_kernel_detection_path: "/src/kernels/detection.cl"
+    opencl_kernel_verification_path: "/src/kernels/verification.cl"
+    reference_link_vtk: "reference_link_vtk"
+  max_box_pcl:
+    max: [1.5, 1.5, 2.0]
+    min: [-1.5, -1.5, 0.0]
+  robot_control:
+    panda_arm_to_hand_offset: 0.1
+    panda_arm_velocity_scaling: 1.0
+    panda_arm_acceleration_scaling: 1.0
+    attached_object_link: "panda_link8"
+    goal_orientation_tolerance: 0.001
+    goal_position_tolerance: 0.001
+    goal_joint_tolerance: 0.001
+    detector_exposure_time: 5.0
+    pose_reference_frame: "panda_link0"
+    gripper_height: 0.053819
+  cameras: ["depth_camera", "depth_camera2"]
+  visualization:
+    marker_depth_collision: "/visualization_marker_"

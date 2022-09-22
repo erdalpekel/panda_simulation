@@ -37,6 +37,8 @@
   <depend>rosbridge_msgs</depend>
   <depend>rosapi</depend>
   <depend>tf2_web_republisher</depend>
+  <depend>panda_msgs</depend>
+  <depend>panda_utils</depend>
 
   <!-- CUSTOM -->
   <depend>moveit_core</depend>

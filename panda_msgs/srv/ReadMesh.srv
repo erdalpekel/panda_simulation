@@ -1,0 +1,9 @@
+string volume_read_path
+string volume_write_path
+float64[] spacing 
+bool return_volume
+float32 absorption
+---
+int32[] dimensions
+float32[] volume
+geometry_msgs/Point origin

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>panda_utils</name>
+    <version>0.0.1</version>
+    <description>panda_simulation - utilities</description>
+
+    <maintainer email="info@erdalpekel.de">Erdal Pekel</maintainer>
+    <author email="info@erdalpekel.de">Erdal Pekel</author>
+
+    <license>TODO</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <depend>roscpp</depend>
+    <depend>std_msgs</depend>
+    <depend>tf</depend>
+    <depend>interactive_markers</depend>
+    <depend>trac_ik_kinematics_plugin</depend>
+    <depend>trac_ik_lib</depend>
+    <depend>moveit_msgs</depend>
+
+    <exec_depend>joint_state_publisher</exec_depend>
+    <exec_depend>robot_state_publisher</exec_depend>
+    <exec_depend>xacro</exec_depend>
+
+    <build_depend>message_generation</build_depend>
+    <build_depend>controller_manager</build_depend>
+
+    <exec_depend>message_runtime</exec_depend>
+
+</package>

@@ -1,0 +1,32 @@
+<launch>
+    <arg name="pointcloud_viewer" default="false" />
+
+    <group ns="/depth_camera">
+        <param name="/depth_camera/robot_description" command="$(find xacro)/xacro --inorder '$(find panda_safety)/models/depth_camera.xacro'" />
+
+        <!-- Spawn the model into Gazebo -->
+        <node name="spawn_urdf2" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model depth_camera" />
+
+        <node pkg="tf" type="static_transform_publisher" name="kinect_broadcaster3" args="0 0 0 -0.5 0.5 -0.5 0.5 kinect_link /depth_camera/kinect_pc_frame 100" />
+
+        <!--publish transforms for use by rviz and tf_listeners-->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    </group>
+
+    <group ns="/depth_camera2">
+        <param name="/depth_camera2/robot_description" command="$(find xacro)/xacro --inorder '$(find panda_safety)/models/depth_camera2.xacro'" />
+
+        <!-- Spawn the model into Gazebo -->
+        <node name="spawn_urdf2" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model depth_camera2" />
+
+        <node pkg="tf" type="static_transform_publisher" name="kinect_broadcaster5" args="0 0 0 -0.5 0.5 -0.5 0.5 kinect_link2 /depth_camera2/kinect_pc_frame 100" />
+
+        <!--publish transforms for use by rviz and tf_listeners-->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    </group>
+
+    <!-- launch rviz using a specific config file -->
+    <group if="$(arg pointcloud_viewer)">
+        <node pkg="rviz" type="rviz" name="rviz_pointcloud_viewer" args="-d $(find panda_safety)/launch/depth_analyzer_simulation.rviz" />
+    </group>
+</launch>

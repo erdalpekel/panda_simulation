@@ -8,10 +8,11 @@
     <arg name="headless" default="false" />
     <arg name="debug" default="false" />
     <arg name="load_gripper" default="true" />
+    <arg name="safety" default="false" />
+    <arg name="pointcloud_viewer" default="false" />
 
     <!--launch GAZEBO with own world configuration -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <!-- <arg name="world_name" value="$(find robotics_assisted_tomography)/worlds/tomography.world"/> -->
         <arg name="debug" value="$(arg debug)" />
         <arg name="gui" value="$(arg gui)" />
         <arg name="paused" value="$(arg paused)" />
@@ -61,5 +62,21 @@
     </include>
 
     <node pkg="tf2_web_republisher" type="tf2_web_republisher" name="tf2_web_republisher" />
+
+    <!-- safety features -->
+    <rosparam command="load" file="$(find panda_simulation)/config/panda_simulation.yaml" />
+    <node pkg="tf" type="static_transform_publisher" name="base_vtk_broadcaster" args="0 0 0 -0.707 0 0 0.707 reference_link_vtk world 100" />
+    <group if="$(arg safety)">
+        <include file="$(find panda_safety)/launch/depth_analyzer_simulation.launch">
+            <arg name="pointcloud_viewer" value="$(arg pointcloud_viewer)" />
+        </include>
+        <group if="$(arg gui)">
+            <node pkg="panda_safety" type="sphere_list_visualizer" name="sphere_list_visualizer_node1" args="_camera:=depth_camera" />
+            <node pkg="panda_safety" type="sphere_list_visualizer" name="sphere_list_visualizer_node2" args="_camera:=depth_camera2" />
+        </group>
+        <node pkg="panda_safety" type="collision_detector" name="collision_detector1" args="_camera:=depth_camera _opencl_device:=0 _show_at_start:=true _visualize:=true" output="screen" />
+        <node pkg="panda_safety" type="collision_detector" name="collision_detector2" args="_camera:=depth_camera2 _opencl_device:=0 _show_at_start:=true _visualize:=true" output="screen" />
+        <node pkg="panda_safety" type="mesh_reader" name="mesh_reader" args="" output="screen" />
+    </group>
 
 </launch>

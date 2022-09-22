@@ -65,3 +65,17 @@ You can see the full explanation in my [blog post](https://erdalpekel.de/?p=55).
    A minimalist web interface based on ReactJS is showcased which can visualize the robot joint data and the visual state in real-time in the browser.
 
 ![Panda web interface](assets/panda-web-interface.png?raw=true "Panda web interface")
+
+   [Panda real-time collision detection](https://erdalpekel.de/?p=457)
+
+   We present a real-time collision detection algorithm that was developed for the Panda robotic arm and runs on the GPU with OpenCL.
+
+   The collision detection feature can be enabled in the configuration stage by passing the `-DSAFETY=1` option to `catkin_make`.
+
+   In order to start the simulation with the collision detection feature enabled run the following command:
+
+```
+roslaunch panda_simulation simulation.launch safety:=true pointcloud_viewer:=true
+```
+
+![Panda real-time collision detection](assets/collision-detection-featured.png?raw=true "Panda real-time collision detection")

@@ -1,16 +1,19 @@
+#include <boost/filesystem.hpp>
 #include <jsoncpp/json/json.h>
+#include <memory>
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene/planning_scene.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
+#include <panda_msgs/RobotStopMsg.h>
+#include <panda_utils/constants.h>
 #include <ros/ros.h>
-#include <boost/filesystem.hpp>
 
 static const std::string PLANNING_GROUP_ARM = "panda_arm";
 static const std::string APP_DIRECTORY_NAME = ".panda_simulation";
+std::unique_ptr<moveit::planning_interface::MoveGroupInterface> move_group_arm;
 
-moveit_msgs::CollisionObject extractObstacleFromJson(Json::Value &root, std::string name)
-{
+moveit_msgs::CollisionObject extractObstacleFromJson(Json::Value &root, std::string name) {
   moveit_msgs::CollisionObject collision_object;
   collision_object.header.frame_id = "world";
   collision_object.id = name;
@@ -50,8 +53,14 @@ moveit_msgs::CollisionObject extractObstacleFromJson(Json::Value &root, std::str
   return std::move(collision_object);
 }
 
-int main(int argc, char **argv)
-{
+bool stop(panda_msgs::RobotStopMsg::Request &request, panda_msgs::RobotStopMsg::Response &response) {
+  move_group_arm->stop();
+  ROS_INFO("STOP command fired with move_group <panda_arm>");
+
+  return true;
+}
+
+int main(int argc, char **argv) {
   namespace fs = boost::filesystem;
   ROS_INFO("RUNNING robot_control_node");
 
@@ -61,76 +70,67 @@ int main(int argc, char **argv)
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
-  moveit::planning_interface::MoveGroupInterface move_group_arm(PLANNING_GROUP_ARM);
+  move_group_arm = std::make_unique<moveit::planning_interface::MoveGroupInterface>(PLANNING_GROUP_ARM);
 
   ros::Publisher planning_scene_diff_publisher = node_handle.advertise<moveit_msgs::PlanningScene>("planning_scene", 1);
   ros::WallDuration sleep_t(0.5);
-  while (planning_scene_diff_publisher.getNumSubscribers() < 1)
-  {
+  while (planning_scene_diff_publisher.getNumSubscribers() < 1) {
     sleep_t.sleep();
   }
   moveit_msgs::PlanningScene planning_scene;
 
   // read JSON files from ~/.panda_simulation
   fs::path home(getenv("HOME"));
-  if (fs::is_directory(home))
-  {
+  if (fs::is_directory(home)) {
     fs::path app_directory(home);
     app_directory /= APP_DIRECTORY_NAME;
 
-    if (!fs::exists(app_directory) && !fs::is_directory(app_directory))
-    {
+    if (!fs::exists(app_directory) && !fs::is_directory(app_directory)) {
       ROS_WARN_STREAM(app_directory << " does not exist");
 
       // Create .panda_simulation directory
       std::string path(getenv("HOME"));
-      path += "/.panda_simulation";
+      path += "/.panda_core";
       ROS_INFO("Creating %s collision objects directory.", path);
-      try
-      {
+      try {
         boost::filesystem::create_directory(path);
-      }
-      catch (const std::exception&)
-      {
-        ROS_ERROR(
-          "%s directory could not be created."
-          "Please create this directory yourself "
-          "if you want to specify collision objects.", path.c_str());
+      } catch (const std::exception &) {
+        ROS_ERROR("%s directory could not be created."
+                  "Please create this directory yourself "
+                  "if you want to specify collision objects.",
+                  path.c_str());
         return -1;
       }
     }
 
     std::vector<moveit_msgs::CollisionObject> collision_objects;
     ROS_INFO_STREAM(app_directory << " is a directory containing:");
-    for (auto &entry : boost::make_iterator_range(fs::directory_iterator(app_directory), {}))
-    {
+    for (auto &entry : boost::make_iterator_range(fs::directory_iterator(app_directory), {})) {
       ROS_INFO_STREAM(entry);
 
       std::ifstream file_stream(entry.path().string(), std::ifstream::binary);
-      if (file_stream)
-      {
+      if (file_stream) {
         Json::Value root;
         file_stream >> root;
 
         moveit_msgs::CollisionObject collision_object = extractObstacleFromJson(root, entry.path().stem().string());
         collision_objects.push_back(collision_object);
-      }
-      else
-      {
+      } else {
         ROS_WARN_STREAM("could not open file " << entry.path());
       }
     }
 
     // Publish the collision objects to the scene
-    for (const auto &collision_object : collision_objects)
-    {
-      collision_object.header.frame_id = move_group_arm.getPlanningFrame();
+    for (const auto &collision_object : collision_objects) {
+      collision_object.header.frame_id = move_group_arm->getPlanningFrame();
       planning_scene.world.collision_objects.push_back(collision_object);
     }
 
     ROS_INFO_STREAM("# collision objects " << planning_scene.world.collision_objects.size());
     planning_scene.is_diff = true;
     planning_scene_diff_publisher.publish(planning_scene);
+
+    ros::ServiceServer stop_service = node_handle.advertiseService(constants::service_endpoints::ROBOT_STOP, &stop);
 
     ROS_INFO("robot_control_node is ready");
     ros::waitForShutdown();
